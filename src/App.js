@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import { useState} from 'react'
 import './App.css';
+import Number from './Number'
+import Button from './Button/Button'
 
 function App() {
+const [counter, setCounter] = useState(0)
+
+function calculate(number) {
+  number === 0 ? setCounter(0) : setCounter(counter + number)
+}
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Calculat0r</h1>
+      <Number counterValue={counter}/>
+
+      <Button text="-random" mathFunction={() => calculate(-Math.ceil((Math.random()*100)))}/>
+      <Button text="-1" mathFunction={() => calculate(-1)}/>
+      <Button text="-10" mathFunction={() => calculate(-10)}/>      
+      <Button text="+1" mathFunction={() => calculate(1)}/>
+      <Button text="+10" mathFunction={() => calculate(10)}/>
+      <Button text="+random" mathFunction={() => calculate(Math.ceil((Math.random()*100)))}/>
+      <br />      
+      <Button className="button--reset" text="Reset" mathFunction={() => calculate(0)}/>
+      
     </div>
   );
 }
